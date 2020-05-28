@@ -14,6 +14,8 @@ class Solution(object):
         hash_map = {}
         for idx, num1 in enumerate(nums):
             num2 = target - num1
+            if num2 in hash_map:
+                return [hash_map[num2], idx]
             hash_map[num1] = idx
         
         return []
@@ -41,4 +43,5 @@ class Solution(object):
                         return [hash_map[num1][0], hash_map[num1][1]]
                     else:
                         continue
+                    
         return []
