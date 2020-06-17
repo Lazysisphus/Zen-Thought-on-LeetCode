@@ -13,7 +13,7 @@ class Solution(object):
             else:
                 return num
 
-        # 方法2：先排序，再查找，时间复杂度O(nlogn)
+        # 方法2：先排序，再查找，时间复杂度O(nlogn)，空间复杂度O(1)
         nums.sort()
         pre = nums[0]
         for i in range(1, len(nums)):
@@ -22,7 +22,7 @@ class Solution(object):
             else:
                 pre = nums[i]
 
-        # 方法3：利用下标，一次遍历，时间复杂度O(1)
+        # 方法3：利用下标，一次遍历，时间复杂度O(n)，空间复杂度O(1)
         # 一个小细节：不要使用range(len(nums))，似乎在每次循环中都会计算长度
         n = len(nums)
         for i in range(n):
