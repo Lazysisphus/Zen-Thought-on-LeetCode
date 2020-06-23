@@ -52,4 +52,3 @@ class Solution(object):
             return []
         else:
             return self.reversePrint(head.next) + [head.val]
-        

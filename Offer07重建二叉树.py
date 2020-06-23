@@ -31,4 +31,3 @@ class Solution(object):
         root.right = self.buildTree(preorder[i+1: ], inorder[i+1: ])
 
         return root
-        
