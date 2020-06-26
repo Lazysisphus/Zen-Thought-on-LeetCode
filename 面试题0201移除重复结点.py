@@ -29,17 +29,18 @@ class Solution(object):
         # 方法2：两层循环，暴力解法
         # 时间复杂度O(n^2)，空间复杂度O(1)
         # python会超时
+        # 注意：这里删除的是内层结点，所以
         if not head or not head.next:
             return head
     
-        out_p = head
-        del_p = head # 在内循环中，删除del_p的下一个元素
-        while out_p:
+        cur = head
+        del_p = head # dep_p是快指针，对应每个cur，del_p扫描整个链表
+        while cur:
             while del_p.next:
-                if del_p.next.val == out_p.val:
+                if del_p.next.val == cur.val:
                     del_p.next = del_p.next.next
                 else:
                     del_p = del_p.next
-            out_p = out_p.next
-            del_p = out_p
+            cur = cur.next
+            del_p = cur
         return head
