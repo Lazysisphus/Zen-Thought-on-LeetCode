@@ -17,10 +17,17 @@ class Solution(object):
         #   链表的头结点为空；
         #   链表的长度小于k
         #   k为0或负值
+        if not head or k == 0:
+            return None
+        
         p1, p2 = head, head
         while k-1:
-            p1 = p1.next
+            if p1.next:
+                p1 = p1.next
+            else:
+                return None
             k -= 1
+        
         while p1.next:
             p1 = p1.next
             p2 = p2.next
