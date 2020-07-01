@@ -13,6 +13,7 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         # 递归先序遍历+回溯
+        # 对于记录递归状态的全局变量path和cur_sum，在回溯的时候需要做状态的返回
         # 时间复杂度O(n)，空间复杂度O(n)
         res = []
         path = []
