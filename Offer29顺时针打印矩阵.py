@@ -4,6 +4,7 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: List[int]
         """
+        # 字节跳动2021秋招提前批有问到，不过写出来了
         if not matrix or not matrix[0]:
             return []
         
