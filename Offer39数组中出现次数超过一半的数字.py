@@ -24,7 +24,7 @@ class Solution(object):
         mid = low + (high - low) // 2
         pivot = partition(low, high, nums)
         while pivot != mid:
-            if pivot < mid:
+            if pivot < nums[mid]:
                 low = mid + 1
                 pivot = partition(low, high, nums)
             else:
