@@ -6,13 +6,13 @@ class Solution(object):
         """
         # 方法1：使用快速排序中的partition找到数组的中位数
         # 时间复杂度O(n)，但是无法通过
-        def partition(low, high, nums):
+        def partition(nums, low, high):
             pivot = nums[low]
             while low < high:
-                while low < high and nums[high] > pivot:
+                while low < high and nums[high] >= pivot:
                     high -= 1
                 nums[low] = nums[high] # low的值已经保存在pivot中
-                while low < high and nums[low] < pivot:
+                while low < high and nums[low] <= pivot:
                     low += 1
                 nums[high] = nums[low]
             nums[low] = pivot
@@ -22,15 +22,15 @@ class Solution(object):
             return None
         low, high = 0, len(nums)-1
         mid = low + (high - low) // 2
-        pivot = partition(low, high, nums)
-        while pivot != mid:
-            if pivot < nums[mid]:
-                low = mid + 1
-                pivot = partition(low, high, nums)
+        index = partition(nums, low, high)
+        while index != mid:
+            if index > mid:
+                high = index - 1
+                index = partition(nums, low, high)
             else:
-                high = mid - 1
-                pivot = partition(low, high, nums)
-        return nums[mid]
+                low = index + 1
+                index = partition(nums, low, high)
+        return nums[index]
 
         # 方法2：摩尔投票法
         # 时间复杂度O(n)
