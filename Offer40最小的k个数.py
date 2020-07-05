@@ -5,7 +5,11 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        # 方法1：使用快速排序中的partition找到数组第k小的数
+        # 方法1：使用自带排序，时间复杂度O(ologn)，是一种称为timesort的排序方法
+        arr.sort()
+        return arr[:k]
+
+        # 方法2：使用快速排序中的partition找到数组第k小的数
         # 时间复杂度O(n)
         def partition(arr, low, high):
             pivot = arr[low]
@@ -31,4 +35,4 @@ class Solution(object):
             if index < k-1:
                 low = index + 1
                 index = partition(arr, low, high)
-        return arr[ :k]
+        return arr[:k]
