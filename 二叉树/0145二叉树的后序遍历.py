@@ -20,10 +20,27 @@ class Solution(object):
             helper(root.right)
             res.append(root.val)
         helper(root)
-
         return res
 
-        # 方法2：循环实现
+        # 方法2：巧妙迭代
+        # 后序的顺序为『左右根』，其逆序为『根右左』，与前序类似
+        # 因此只要写一个类似前序的迭代，然后反转最后的结果就ok了
+        # 注意前序遍历中，由于栈后入先出的特点，是先压入右子树的根结点
+        # 因此，后序遍历先压入左子树的根结点
+        if not root:
+            return []
+        res = []
+        stack = [root]
+        while stack:
+            cur = stack.pop()
+            res.append(cur.val)
+            if cur.left:
+                stack.append(cur.left)
+            if cur.right:
+                stack.append(cur.right)
+        return res[::-1]
+
+        # 方法3：笨比迭代
         res = []
         stack = []  
         node = root
@@ -40,10 +57,9 @@ class Solution(object):
                 node = stack[-1].right # 则转向遍历右节点
             else:
                 node = None # 没有左子树或右子树，强迫退栈
-                
         return res
 
-        # 方法3：颜色标记法
+        # 方法4：颜色标记
         WHITE, GRAY = 0, 1
         res = []
         stack = [(WHITE, root)]
@@ -57,5 +73,4 @@ class Solution(object):
                 stack.append((WHITE, node.left))
             elif color == GRAY:
                 res.append(node.val)
-        
         return res
