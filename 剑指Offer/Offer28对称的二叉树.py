@@ -11,13 +11,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        def helper(root1, root2):
-            if root1 == None and root2 == None:
+        def helper(node1, node2):
+            if not node1 and not node2: # 两个结点都不存在
                 return True
-            elif root1 == None or root2 == None:
+            elif not node1 or not node2: # 只存在一个结点
                 return False
-            # 递归
-            if root1.val != root2.val:
+            elif node1.val != node2.val: # 两个结点都存在，但是值不相同
                 return False
-            return helper(root1.left, root2.right) and helper(root1.right, root2.left)
+            return helper(node1.left, node2.right) and helper(node1.right, node2.left)
         return helper(root, root)
