@@ -29,15 +29,14 @@ class Solution(object):
         # 因此，后序遍历先压入左子树的根结点
         if not root:
             return []
-        res = []
-        stack = [root]
-        while stack:
-            cur = stack.pop()
-            res.append(cur.val)
-            if cur.left:
-                stack.append(cur.left)
-            if cur.right:
-                stack.append(cur.right)
+        cur, res, stack = root, [], []
+        while cur or stack:
+            while cur:
+                res.append(cur.val)
+                stack.append(cur)
+                cur = cur.right
+            tmp = stack.pop()
+            cur = tmp.left
         return res[::-1]
 
         # 方法3：笨比迭代
