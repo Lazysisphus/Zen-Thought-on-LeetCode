@@ -22,18 +22,15 @@ class Solution(object):
         
         return dp[n]
 
-        # 方法2：贪心算法，数学证明，要
-        # 尽可能多剪3，如果最后一段长度为4，则需要平分
-        # 时间复杂度O(1)，空间复杂度O(1)
-        if n == 2:
-            return 1
-        if n == 3:
-            return 2
-        
-        times_of_3 = n // 3
-        if n - (times_of_3 * 3) == 1:
-            times_of_3 -= 1
-        times_of_2 = (n - (times_of_3 * 3)) // 2
-        res = pow(3, times_of_3) * pow(2, times_of_2)
-
-        return res
+        # 方法2：数学证明 + 贪心
+        # 应该尽量多截取长度为3的小段
+        # 时间复杂度O(n)（需要使用math.pow()），空间复杂度O(n)
+        if n < 3:
+            return n - 1
+        a, b = n // 3, n % 3
+        if b == 0:
+            return math.pow(3, a)
+        if b == 1:
+            return math.pow(3, a - 1) * 4
+        if b == 2:
+            return math.pow(3, a) * 2

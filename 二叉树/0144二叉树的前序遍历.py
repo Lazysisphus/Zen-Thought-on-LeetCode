@@ -13,14 +13,13 @@ class Solution(object):
         :rtype: List[int]
         """
         # 方法1：递归实现
-        res = []
         def helper(root):
             if not root:
                 return
             res.append(root.val)
             helper(root.left)
             helper(root.right)
-
+        res = []
         helper(root)
         return res
 
@@ -31,16 +30,16 @@ class Solution(object):
         #   6    14
         #  / \   / \
         # 4   8 12 16
-        p = root
-        stack = []
-        res = []
-        while p or root:
-            while p:
-                stack.append(p)
-                res.append(p.val)
-                p = p.left
-            p = stack.pop().right
-        
+        if not root:
+            return []
+        cur, res, stack = root, [], []
+        while cur or stack:
+            while cur:
+                res.append(cur.val)
+                stack.append(cur)
+                cur = cur.left
+            tmp = stack.pop()
+            cur = tmp.right
         return res
 
         # 方法3：颜色标记法，实质还是栈

@@ -12,7 +12,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        # 方法1：递归遍历
+        # 方法1：递归
         res = []
         def helper(root):
             if not root:
@@ -23,21 +23,17 @@ class Solution(object):
         helper(root)
         return res
 
-        # 方法2：循环遍历
-        res = []
-        stack = []
-        while stack or root:
-			# 不断往左子树方向走，每走一次就将当前节点保存到栈中
-			# 这是模拟递归的调用
-			if root:
-				stack.append(root)
-				root = root.left
-			# 当前节点为空，说明左边走到头了，从栈中弹出节点并保存
-			# 然后转向右边节点，继续上面整个过程
-			else:
-				tmp = stack.pop()
-				res.append(tmp.val)
-				root = tmp.right
+        # 方法2：迭代
+        if not root:
+            return res
+        cur, res, stack = root, [], []
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            tmp = stack.pop()
+            res.append(tmp.val) # 和前序不同，添加结点的位置要靠后
+            cur = tmp.right
         return res
 
         # 方法3：颜色标记法

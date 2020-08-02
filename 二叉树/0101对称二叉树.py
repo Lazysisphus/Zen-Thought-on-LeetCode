@@ -12,15 +12,15 @@ class Solution(object):
         :rtype: bool
         """
         # 方法1：递归
-        def check(node1, node2):
-            if not node1 and not node2:
+        def helper(node1, node2):
+            if not node1 and not node2: # 两个结点都不存在
                 return True
-            if not node1 or not node2:
+            elif not node1 or not node2: # 只存在一个结点
                 return False
-            if node1.val != node2.val:
+            elif node1.val != node2.val: # 两个结点都存在，但是值不相同
                 return False
-            return check(node1.left, node2.right) and check(node1.right, node2.left)
-        return check(root, root)
+            return helper(node1.left, node2.right) and helper(node1.right, node2.left)
+        return helper(root, root)
 
         # 方法2：层序遍历，判断每层是否回文
         if not root: 
