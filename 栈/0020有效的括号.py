@@ -1,23 +1,18 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        # 使用这个程序设计，逻辑要更清晰
+        # 时间复杂度O(n)，空间复杂度O(n)
         if not s:
             return True
-        
-        s = list(s)
-        n = len(s)
-        stack = [s[0]]
-        for i in range(1, n):
-            if s[i] in [")", "]", "}"] and not stack:
-                return False
-            elif s[i] == "]" and stack[-1] == "[":
-                stack.pop()
-            elif s[i] == "}" and stack[-1] == "{":
-                stack.pop()
-            elif s[i] == ")" and stack[-1] == "(":
-                stack.pop()
+
+        stack = []
+        pairs = {"}": "{", "]": "[", ")": "("}
+        for ch in s:
+            if ch in pairs:
+                if stack and stack[-1] == pairs[ch]:
+                    stack.pop()
+                else:
+                    return False
             else:
-                stack.append(s[i])
-        if stack:
-            return False
-        else:
-            return True
+                stack.append(ch)
+        return not stack
