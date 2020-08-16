@@ -18,14 +18,14 @@ class Solution:
 
         # dfs
         def helper(x, y):
-            if image[x][y] == rawColor:
-                image[x][y] = newColor
-                for dx, dy in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
-                    if 0 <= x + dx < row and 0 <= y + dy < col:
-                        helper(x + dx, y + dy)
+            if x < 0 or x >= row or y < 0 or y >= col or image[x][y] != oldColor:
+                return 
+            image[x][y] = newColor
+            for nx, ny in [[x, y + 1], [x, y - 1], [x + 1, y], [x - 1, y]]:
+                helper(nx, ny)
 
-        rawColor = image[sr][sc]
-        if newColor == rawColor:
+        oldColor = image[sr][sc]
+        if newColor == oldColor:
             return image
         row, col = len(image), len(image[0])
         helper(sr, sc)
