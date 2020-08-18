@@ -8,12 +8,7 @@ class Solution(object):
         return self.BubbleSort(nums) # 冒泡排序，不能过
         return self.InsertSort(nums) # 插入排序，不能过
         return self.ShellSort(nums)  # 希尔排序 
-
-
-
-        n = len(nums)
-        self.QuickSort(0, n - 1, nums)
-        return nums
+        return self.MergeSort(nums)  # 归并排序
 
     def SelectSort(self, nums):
         """
@@ -80,33 +75,70 @@ class Solution(object):
                     i -= step
             step //= 2
         return nums
-
-    # 快速排序
-    # partition的两种写法
-    def QuickSort(self, low, high, nums):
-        if low < high:
-            mid = self.partition2(low, high, nums)
-            self.QuickSort(low, mid-1, nums)
-            self.QuickSort(mid+1, high, nums)
     
-    def partition1(self, low, high, nums):
-        pivot = nums[high]
-        i = low
-        for j in range(low, high):
-            if nums[j] < pivot:
-                nums[i], nums[j] = nums[j], nums[i]
-                i += 1
-        nums[high], nums[i] = nums[i], nums[high]
-        return i
+    def MergeSort(self, nums):
+        """
+        归并排序
+        时间复杂度，O(nlogn)
+        稳定，外排序，占用额外空间
+        """
+        def merge(nums1, nums2):
+            i, j = 0, 0
+            res = []
+            while i < len(nums1) and j < len(nums2):
+                if nums1[i] <= nums2[j]:
+                    res.append(nums1[i])
+                    i += 1
+                else:
+                    res.append(nums2[j])
+                    j += 1
+            res += nums1[i: ]
+            res += nums2[j: ]
+            return res
+        
+        n = len(nums)
+        if n <= 1:
+            return nums
+        mid = n // 2
+        left = self.MergeSort(nums[: mid])
+        right = self.MergeSort(nums[mid: ])
+        return merge(left, right)
 
-    def partition2(self, low, high, nums):
-        pivot = nums[low]
-        while low < high:
-            while low < high and nums[high] >= pivot:
-                high -= 1
-            nums[low] = nums[high] # low的值已经保存在pivot中
-            while low < high and nums[low] <= pivot:
-                low += 1
-            nums[high] = nums[low]
-        nums[low] = pivot
-        return low
+    def QuickSort(nums):
+        """
+        快速排序
+        时间复杂度O(nlogn)
+        不稳定，内排序
+        """
+        n = len(nums)
+        self.QuickSort(0, n - 1, nums)
+        return nums
+        # 快速排序
+        # partition的两种写法
+        def QuickSort(self, low, high, nums):
+            if low < high:
+                mid = self.partition2(low, high, nums)
+                self.QuickSort(low, mid-1, nums)
+                self.QuickSort(mid+1, high, nums)
+        
+        def partition1(self, low, high, nums):
+            pivot = nums[high]
+            i = low
+            for j in range(low, high):
+                if nums[j] < pivot:
+                    nums[i], nums[j] = nums[j], nums[i]
+                    i += 1
+            nums[high], nums[i] = nums[i], nums[high]
+            return i
+
+        def partition2(self, low, high, nums):
+            pivot = nums[low]
+            while low < high:
+                while low < high and nums[high] >= pivot:
+                    high -= 1
+                nums[low] = nums[high] # low的值已经保存在pivot中
+                while low < high and nums[low] <= pivot:
+                    low += 1
+                nums[high] = nums[low]
+            nums[low] = pivot
+            return low
