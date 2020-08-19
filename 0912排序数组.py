@@ -10,6 +10,7 @@ class Solution(object):
         return self.ShellSort(nums)  # 希尔排序
         return self.MergeSort(nums)  # 归并排序
         return self.QuickSort(0, len(nums) - 1, nums) # 快速排序
+        return self.HeapSort(nums)   # 堆排序
 
     def SelectSort(self, nums):
         """
@@ -140,4 +141,37 @@ class Solution(object):
         nums[low] = pivot
         return low
 
-    
+    def HeapSort(self, nums):
+        """
+        step1: 
+            建堆：从最后一个非叶子结点开始，自下而上，从右向左调整，使数组满足堆的性质
+        step2: 
+            堆排序：进行n-1次操作，每次操作分两步进行
+                    首先将堆顶和最末元素交换
+                    然后调整除当前最末元素的数组，使其满足堆的性质
+        时间复杂度O(nlogn)
+        不稳定，内排序
+        """
+        n = len(nums)
+        for i in reversed(range(n // 2)):
+            self.adjust_heap(nums, i, n)
+        
+        for i in range(n - 1, -1, -1):
+            nums[0], nums[i] = nums[i], nums[0]
+            self.adjust_heap(nums, 0, i)
+        return nums
+
+    def adjust_heap(self, nums, startpos, endpos):
+        """
+        [startpos, endpos]为调整的范围
+        对该范围内的元素调整，使它们满足堆的性质
+        """
+        pos = startpos
+        childpos = pos * 2 + 1
+        if childpos < endpos:
+            rightpos = childpos + 1
+            if rightpos < endpos and nums[rightpos] > nums[childpos]:
+                childpos = rightpos
+            if nums[childpos] > nums[pos]:
+                nums[pos], nums[childpos] = nums[childpos], nums[pos]
+                adjust_heap(nums, childpos, endpos)
