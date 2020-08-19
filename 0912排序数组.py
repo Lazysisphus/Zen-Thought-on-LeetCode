@@ -9,6 +9,7 @@ class Solution(object):
         return self.InsertSort(nums) # 插入排序，不能过
         return self.ShellSort(nums)  # 希尔排序 
         return self.MergeSort(nums)  # 归并排序
+        return self.QuickSort(0, len(nums) - 1, nums) # 快速排序
 
     def SelectSort(self, nums):
         """
@@ -120,6 +121,7 @@ class Solution(object):
                 mid = self.partition2(low, high, nums)
                 self.QuickSort(low, mid-1, nums)
                 self.QuickSort(mid+1, high, nums)
+            return nums
         
         def partition1(self, low, high, nums):
             pivot = nums[high]
