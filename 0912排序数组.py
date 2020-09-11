@@ -14,27 +14,29 @@ class Solution(object):
 
     def SelectSort(self, nums):
         """
-        选择排序
+        选择排序：
+            从数组的无序部分（如后半部分）选择最小的数字，拼在有序数组（如数组的前半部分）后面
         时间复杂度O(n^2)
-        不稳定，内排序
+        不稳定(5, 8, 5, 2, 9)，内排序
         """
         n = len(nums)
         for i in range(n - 1):
-            min_idx = i
+            cur_idx = i
             for j in range(i + 1, n):
-                if nums[min_idx] > nums[j]:
-                    min_idx = j
-            nums[i], nums[min_idx] = nums[min_idx], nums[i]
+                if nums[cur_idx] > nums[j]:
+                    cur_idx = j
+            nums[i], nums[cur_idx] = nums[cur_idx], nums[i]
         return nums
 
     def BubbleSort(self, nums):
         """
-        冒泡排序
+        冒泡排序：
+            进行 n - 1 次沉淀，每次沉淀从前到后进行
         时间复杂度O(n^2)
         稳定，内排序
         """
         n = len(nums)
-        for i in range(n - 1): # 沉淀n-1次
+        for i in range(n - 1): # 选择第 i 个元素进行沉淀
             flag = 0
             for j in range(1, n - i): # 每次沉淀扫描范围
                 if nums[j - 1] > nums[j]:
@@ -55,9 +57,9 @@ class Solution(object):
         """
         n = len(nums)
         for i in range(1, n):
-            for j in range(i, 0, -1):
-                if nums[j] < nums[j - 1]:
-                    nums[j], nums[j - 1] = nums[j - 1], nums[j]
+            while i > 0 and nums[i - 1] > nums[i]:
+                nums[i - 1], nums[i] = nums[i], nums[i - 1]
+                i -= 1
         return nums
 
     def ShellSort(self, nums):
@@ -106,7 +108,6 @@ class Solution(object):
         right = self.MergeSort(nums[mid: ])
         return merge(left, right)
 
-
     def QuickSort(self, low, high, nums):
         """
         快速排序
@@ -149,6 +150,7 @@ class Solution(object):
             堆排序：进行n-1次操作，每次操作分两步进行
                     首先将堆顶和最末元素交换
                     然后调整除当前最末元素的数组，使其满足堆的性质
+                    直至数组整体有序
         时间复杂度O(nlogn)
         不稳定，内排序
         """
