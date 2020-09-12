@@ -1,30 +1,18 @@
 '''
-给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
-
-candidates 中的每个数字在每个组合中只能使用一次。
+找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
 
 说明：
 
-所有数字（包括目标数）都是正整数。
+所有数字都是正整数。
 解集不能包含重复的组合。 
-示例 1:
+示例 1:
 
-输入: candidates = [10,1,2,7,6,1,5], target = 8,
-所求解集为:
-[
-  [1, 7],
-  [1, 2, 5],
-  [2, 6],
-  [1, 1, 6]
-]
-示例 2:
+输入: k = 3, n = 7
+输出: [[1,2,4]]
+示例 2:
 
-输入: candidates = [2,5,2,1,2], target = 5,
-所求解集为:
-[
-  [1,2,2],
-  [5]
-]
+输入: k = 3, n = 9
+输出: [[1,2,6], [1,3,5], [2,3,4]]
 '''
 
 
@@ -45,7 +33,7 @@ class Solution(object):
                 if j > i and candidates[j] == candidates[j-1]:
                     continue
                 backtrack(j + 1, tmp_sum + candidates[j], tmp + [candidates[j]])
-        
+
         if not candidates:
             return []
         candidates.sort()
