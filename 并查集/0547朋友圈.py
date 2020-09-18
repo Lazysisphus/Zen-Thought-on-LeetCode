@@ -55,3 +55,40 @@ class Solution:
 方法2：
     并查集
 '''
+from collections import Counter
+
+class UF:
+    def __init__(self, n):
+        self.uf = [-1] * n
+
+    def find(self, idx):
+        if self.uf[idx] == -1:
+            return idx
+        return self.find(self.uf[idx])
+    
+    def union(self, idx1, idx2):
+        f1 = self.find(idx1)
+        f2 = self.find(idx2)
+        if f1 != f2: 
+            self.uf[f2] = f1
+
+    def result(self):
+        return Counter(self.uf)[-1] # 每个连通分量最终指向-1
+
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        if not M:
+            return 0
+        
+        edges = []
+        n = len(M)
+        for j in range(1, n):
+            for i in range(j):
+                if M[i][j] == 1:
+                    edges.append([i, j])
+        print(edges)
+
+        uf = UF(n)
+        for edge in edges:
+            uf.union(edge[0], edge[1])
+        return uf.result()
