@@ -22,11 +22,11 @@
 
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        res = []
-        n = len(nums)
-        def dfs(i, tmp):
+        def backtrack(i, tmp):
             res.append(tmp)
             for j in range(i, n):
-                dfs(j + 1, tmp + [nums[j]])
-        dfs(0, [])
+                backtrack(j + 1, tmp + [nums[j]])
+        res = []
+        n = len(nums)
+        backtrack(0, [])
         return res
