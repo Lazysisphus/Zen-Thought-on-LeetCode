@@ -21,6 +21,6 @@ class Solution:
             for i in range(10):
                 dfs(10 * cur + i)
 
-        for i in range(1,10):
+        for i in range(1, 10):
             dfs(i)
         return res
