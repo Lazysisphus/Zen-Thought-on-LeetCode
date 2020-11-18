@@ -23,10 +23,10 @@ class Solution:
         # 方法1
         # 先将数组排序，然后顺次遍历
         # 时间复杂度O(nlogn)
-        # nums.sort()
-        # for i in range(len(nums) - 1):
-        #     if nums[i] == nums[i + 1]:
-        #         return nums[i]
+        nums.sort()
+        for i in range(len(nums) - 1):
+            if nums[i] == nums[i + 1]:
+                return nums[i]
         
         # 方法2
         # 使用一个哈希表来降低方法1的时间复杂度
