@@ -53,4 +53,4 @@ def method2(nums):
             beg = mid + 1
     return -1
 
-print(method2(nums))
+# print(method2(nums))
