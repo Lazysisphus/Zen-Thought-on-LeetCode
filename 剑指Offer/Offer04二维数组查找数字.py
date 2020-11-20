@@ -55,6 +55,3 @@ class Solution:
             else:
                 col -= 1
         return flag
-
-        # 方法2
-        
