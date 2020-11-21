@@ -20,14 +20,14 @@
 
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
-        res = []
-        n = len(nums)
-        nums.sort()
         def dfs(i, tmp):
             res.append(tmp)
             for j in range(i, n):
                 if j > i and nums[j] == nums[j - 1]:
                     continue
                 dfs(j + 1, tmp + [nums[j]])
+        res = []
+        n = len(nums)
+        nums.sort()
         dfs(0, [])
         return res
