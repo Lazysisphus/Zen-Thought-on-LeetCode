@@ -18,10 +18,14 @@ second = "ple"
 first = "pales"
 second = "pal"
 输出: False
+
+参考题解：
+https://leetcode-cn.com/problems/one-away-lcci/solution/mian-shi-ti-0105-yi-ci-bian-ji-shuang-zh-5fzv/
 """
 
 class Solution:
     def oneEditAway(self, first: str, second: str) -> bool:
+        # 双指针法，时间复杂度O(len1+len2)，空间复杂度O(1)
         len1, len2 = len(first), len(second)
         if abs(len1 - len2) > 1:
             return False
@@ -33,12 +37,13 @@ class Solution:
                 i += 1
                 j += 1
                 continue # 如果两个指针当前指向的字符相同，一直向后遍历
+            # 如果两个指针当前指向的字符串不同，两指针向后移动1位，同时记录一次编辑
             i += 1
             j += 1
-            cnt += 1 # 累计一次编辑 
+            cnt += 1
             if cnt > 1:
                 return False
-            if len1 != len2:
+            if len1 != len2: # 两个字符串长度不一致，只能通过删除或者插入来编辑
                 if len1 < len2:
                     i -= 1
                 else:
