@@ -1,3 +1,24 @@
+"""
+输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+
+ 
+
+示例 1：
+
+输入：head = [1,3,2]
+输出：[2,3,1]
+ 
+
+限制：
+
+0 <= 链表长度 <= 10000
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+"""
+
+
 # 起床太早了，困啊 ヽ(｀⌒´メ)ノ
 # Definition for singly-linked list.
 # class ListNode(object):
@@ -14,13 +35,13 @@ class Solution(object):
         :type head: ListNode
         :rtype: List[int]
         """
-        # 需要明确能否改变链表的指针方向
-        # 方法1：反转链表，时间复杂度O(n)
+        # 方法1
+        # 反转链表，时间复杂度O(n)
         if not head:
             return []
         if not head.next:
             return [head.val]
-            
+
         pre = None
         cur = head
         while cur:
@@ -35,8 +56,8 @@ class Solution(object):
             pre = pre.next
         return res
 
-        # 方法2：使用栈
-        # 时间和空间复杂度都是O(n)
+        # 方法2
+        # 使用栈，时间和空间复杂度都是O(n)
         if not head:
             return []
 
@@ -47,7 +68,8 @@ class Solution(object):
             cur = cur.next
         return res[::-1]
 
-        # 方法3：使用递归
+        # 方法3
+        # 使用递归
         if not head:
             return []
         else:
